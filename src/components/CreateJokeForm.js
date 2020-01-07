@@ -22,7 +22,7 @@ const CreateJokeForm = () => {
             //   onChange={handleChanges}
             //   value={note.body}
               />
-              <button type="submit"> Add Note</button>
+              <button type="submit"> Add Jokes</button>
             </form>
             );
 
