@@ -1,42 +1,54 @@
 import React, { useState } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import axios from "axios";
 
-export default function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = (props) => {
 
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
-  }
+  const [loginData, setLoginData] = useState({
+    username: "",
+    password: ""
+  });
 
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
+  const changeHandler = (e) => {
+    setLoginData({
+      ...loginData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axios.post(``, loginData)
+      .then(res => {
+        localStorage.setItem('token', res.data.payload);
+        setLoginData({
+          username: "",
+          password: ""
+        });
+        props.history.push("/");
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
-    <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
-            autoFocus
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-          />
-        </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit">
-          Login
-          </Button>
+    <>
+      <h1>Welcome to Dad Jokes!</h1>
+      <form onSubmit={submitHandler}>
+        <input
+          type="text"
+          name="username"
+          onChange={changeHandler}
+          value={loginData.username}
+        />
+        <input
+          type="password"
+          name="password"
+          onChange={changeHandler}
+          value={loginData.password}
+        />
+        <button>Login</button>
       </form>
-    </div>
+    </>
   );
-}
+};
+
+export default Login;
