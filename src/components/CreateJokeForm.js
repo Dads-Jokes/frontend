@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 const CreateJokeForm = () => {
-
-
   return (
     <form>
       <label htmlFor="title"> Tell me a joke.</label>
@@ -25,7 +23,6 @@ const CreateJokeForm = () => {
       <button type="submit"> Add Note</button>
     </form>
   );
-
 }
 
 export default CreateJokeForm;
