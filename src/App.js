@@ -1,8 +1,8 @@
 import React from "react";
 import CreateJokeForm from "./components/CreateJokeForm";
-import logo from "./logo.svg";
 import Dashboard from "./components/Dashboard";
-import './App.css';
+import Register from "./components/login/Register";
+import "./App.css";
 
 function App() {
   return (
