@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const CreateJokeForm = ({ addNewJoke }) => {
   // console.log("this is our props",props);
-  const [joke, setJoke] = useState({ id: "", title: "", body: "" });
+  const [joke, setJoke] = useState({ id: "", setup: "", punch_line: "" });
 
   const handleChanges = (event) => {
     setJoke({ ...joke, [event.target.name]: event.target.value });
@@ -11,21 +11,21 @@ const CreateJokeForm = ({ addNewJoke }) => {
   const submitForm = (event) => {
     event.preventDefault();
     addNewJoke(joke);
-    setJoke({ id: "", title: "", body: "" });
+    setJoke({ id: 1, setup: " ", punch_line: " " });
   };
 
   return (
     <form onSubmit={submitForm}>
-      <label htmlFor="title">Tell me a joke.</label>
+      <label htmlFor="setup">Tell me a joke.</label>
       <br />
       <br />
       <input
-        id="title"
+        id="setup"
         type="text"
-        name="title"
+        name="setup"
         placeholder="Enter a joke"
         onChange={handleChanges}
-        value={joke.title}
+        value={joke.setup}
       />
       <br />
       <br />
@@ -34,10 +34,10 @@ const CreateJokeForm = ({ addNewJoke }) => {
       <br />
       <textarea
         id="joke"
-        name="body"
+        name="punch_line"
         placeholder=" Add Joke here "
         onChange={handleChanges}
-        value={joke.body}
+        value={joke.punch_line}
       />
       <br />
       <br />

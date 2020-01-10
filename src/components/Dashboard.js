@@ -1,22 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import JokeList from "./JokeList";
 import CreateJokeForm from "./CreateJokeForm";
+import axios from "axios";
 //import data from "./data";
 
 function AppJokes() {
   const [jokes, setJokes] = useState([
     {
       id: 1,
-      title: "This is a Dad Jokes",
-      body: " Not so Funny jokes...Ha,Ha,Ha"
-    }
+      setup: " ",
+      punch_line: " "
+    } 
   ]);
+  
+  
+  useEffect(() => {
+    axios.get("https://jokr.herokuapp.com/api/jokes").then(response => {
+      console.log(response);
+      setJokes(response.data);
+    });
+  }, []);
+
+
 
   const addNewJoke = joke => {
     const newJokes = {
       id: Date.now(),
-      title: joke.title,
-      body: joke.body
+      setup: joke.setup,
+      punch_line: joke.punch_line
     };
     const newJokeCollection = [...jokes, newJokes];
     setJokes(newJokeCollection);
