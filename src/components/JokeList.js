@@ -5,8 +5,8 @@ const JokeList = props => {
     <div>
       {props.jokes.map(joke => (
         <div className="note" key={joke.id}>
-          <h2>{joke.title}</h2>
-          <p>{joke.body}</p>
+          <h2>{joke.setup}</h2>
+          <p>{joke.punch_line}</p>
         </div>
       ))}
     </div>
