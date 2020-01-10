@@ -1,27 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Register = props => {
+const Register = (props) => {
   const [data, SetData] = useState({ username: "", password: "" });
   const [err, SetErr] = useState("");
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     SetData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
 
     axios
       .post("https://jokr.herokuapp.com/api/auth/register", data)
-      .then(res => {
+      .then((res) => {
         localStorage.setItem("token", res.data.token);
         SetErr("");
         SetData({ username: "", password: "" });
-        props.history.push("/");
+        props.history.push("/dashboard");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         // SetErr(err.response.data.msg);
       });
@@ -29,21 +29,33 @@ const Register = props => {
 
   return (
     <div className="App">
+      <h1>Welcome to Dad Jokes!</h1>
       <form onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
           name="username"
           value={data.username}
           placeholder="Username"
+          type="text"
         />
         <input
           onChange={handleChange}
           name="password"
           value={data.password}
           placeholder="Password"
+          type="password"
         />
         <button type="submit">Register</button>
       </form>
+      <br />
+      <button
+        type="button"
+        onClick={() => {
+          props.history.push("/login");
+        }}
+      >
+        Already Have An Account? Log In!
+      </button>
       <h3 style={{ color: "red" }}>{err && err}</h3>
     </div>
   );
