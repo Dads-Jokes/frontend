@@ -1,14 +1,19 @@
 import React from "react";
-import CreateJokeForm from "./components/CreateJokeForm";
-import logo from "./logo.svg";
+import { Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute.js";
+import "./App.css";
+
 import Dashboard from "./components/Dashboard";
-import './App.css';
+import Login from "./components/login/Login";
+import Register from "./components/login/Register";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Dashboard />
+        <Route path="/login" component={Login} />
+        <Route path="/" exact component={Register} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
       </header>
     </div>
   );
