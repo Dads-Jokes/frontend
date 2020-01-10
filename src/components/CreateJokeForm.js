@@ -4,11 +4,11 @@ const CreateJokeForm = ({ addNewJoke }) => {
   // console.log("this is our props",props);
   const [joke, setJoke] = useState({ id: "", setup: "", punch_line: "" });
 
-  const handleChanges = event => {
+  const handleChanges = (event) => {
     setJoke({ ...joke, [event.target.name]: event.target.value });
   };
 
-  const submitForm = event => {
+  const submitForm = (event) => {
     event.preventDefault();
     addNewJoke(joke);
     setJoke({ id: 1, setup: " ", punch_line: " " });
@@ -45,38 +45,5 @@ const CreateJokeForm = ({ addNewJoke }) => {
     </form>
   );
 };
-
-
-
-
-// import React, { useState } from "react";
-
-// const CreateJokeForm = () => {
-        
- 
-//         return (
-//             <form>
-//               <label htmlFor="setup"> Tell me a joke.</label>
-//               <input 
-//               id="setup" 
-//               type="text" 
-//               name="setup" 
-//               placeholder="Enter a joke" 
-//             //   onChange={handleChanges}
-//             //   value={note.setup}
-//               />
-//               <label htmlFor="note"> Dads Joke</label>
-//               <textarea 
-//               id="note" 
-//               name="punch_line" 
-//               placeholder="Add Joke here"
-//             //   onChange={handleChanges}
-//             //   value={note.punch_line}
-//               />
-//               <button type="submit"> Add Jokes</button>
-//             </form>
-//             );
-
-// }
 
 export default CreateJokeForm;
