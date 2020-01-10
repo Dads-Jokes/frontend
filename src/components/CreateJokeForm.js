@@ -2,7 +2,13 @@ import React, { useState } from "react";
 
 const CreateJokeForm = ({ addNewJoke }) => {
   // console.log("this is our props",props);
-  const [joke, setJoke] = useState({ id: "", setup: "", punch_line: "" });
+  const [joke, setJoke] = useState({
+    id: 0,
+    category: "",
+    setup: "",
+    punch_line: "",
+    likes: 0
+  });
 
   const handleChanges = (event) => {
     setJoke({ ...joke, [event.target.name]: event.target.value });
@@ -11,31 +17,42 @@ const CreateJokeForm = ({ addNewJoke }) => {
   const submitForm = (event) => {
     event.preventDefault();
     addNewJoke(joke);
-    setJoke({ id: 1, setup: " ", punch_line: " " });
+    setJoke({ id: 1, category: "", setup: "", punch_line: "", likes: 0 });
   };
 
   return (
     <form onSubmit={submitForm}>
-      <label htmlFor="setup">Tell me a joke.</label>
+      <label htmlFor="setup">Joke Title.</label>
       <br />
       <br />
       <input
         id="setup"
         type="text"
         name="setup"
-        placeholder="Enter a joke"
+        placeholder="Enter a title"
         onChange={handleChanges}
         value={joke.setup}
       />
+      <label htmlFor="category">Category.</label>
       <br />
       <br />
-      <label htmlFor="joke"> Dads Joke </label>
+      <input
+        id="category"
+        type="text"
+        name="category"
+        placeholder="Enter a category"
+        onChange={handleChanges}
+        value={joke.category}
+      />
+      <br />
+      <br />
+      <label htmlFor="joke"> Punchline </label>
       <br />
       <br />
       <textarea
         id="joke"
         name="punch_line"
-        placeholder=" Add Joke here "
+        placeholder=" Enter the punchline"
         onChange={handleChanges}
         value={joke.punch_line}
       />

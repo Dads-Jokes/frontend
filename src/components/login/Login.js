@@ -17,14 +17,13 @@ const Login = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/auth/register", loginData)
+      .post("/auth/login", loginData)
       .then((res) => {
-        console.log(res);
-        // localStorage.setItem("token", res.data.token);
-        // setLoginData({
-        //   username: "",
-        //   password: ""
-        // });
+        localStorage.setItem("token", res.data.token);
+        setLoginData({
+          username: "",
+          password: ""
+        });
         props.history.push("/dashboard");
       })
       .catch((err) => console.log(err));
@@ -39,12 +38,14 @@ const Login = (props) => {
           name="username"
           onChange={changeHandler}
           value={loginData.username}
+          placeholder="Username"
         />
         <input
           type="password"
           name="password"
           onChange={changeHandler}
           value={loginData.password}
+          placeholder="Password"
         />
         <button>Login</button>
       </form>

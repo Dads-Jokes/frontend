@@ -1,13 +1,11 @@
 import React from "react";
+import JokeCard from "./JokeCard.js";
 
-const JokeList = props => {
+const JokeList = (props) => {
   return (
     <div>
-      {props.jokes.map(joke => (
-        <div className="note" key={joke.id}>
-          <h2>{joke.setup}</h2>
-          <p>{joke.punch_line}</p>
-        </div>
+      {props.jokes.map((joke) => (
+        <JokeCard key={joke.id} joke={joke} />
       ))}
     </div>
   );
