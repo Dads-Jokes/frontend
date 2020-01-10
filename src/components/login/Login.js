@@ -17,7 +17,7 @@ const Login = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/auth/register", loginData)
+      .post("/auth/login", loginData)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         setLoginData({

@@ -14,12 +14,11 @@ const Register = (props) => {
     console.log(data);
 
     axios
-      .post("https://jokr.herokuapp.com/api/auth/register", data)
+      .post("https://the-joker-spa.herokuapp.com/api/auth/register", data)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
         SetErr("");
         SetData({ username: "", password: "" });
-        props.history.push("/dashboard");
+        props.history.push("/login");
       })
       .catch((err) => {
         console.log(err);
