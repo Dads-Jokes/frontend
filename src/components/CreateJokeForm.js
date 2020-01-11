@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { JokeContext } from "../contexts/JokeContext";
+import axiosWithAuth from "../auth/axiosWithAuth.js";
 
-const CreateJokeForm = ({ addNewJoke }) => {
-  // console.log("this is our props",props);
+const CreateJokeForm = () => {
+  const [jokes, setJokes] = useContext(JokeContext);
+
   const [joke, setJoke] = useState({
     id: 0,
     category: "",
@@ -16,7 +19,26 @@ const CreateJokeForm = ({ addNewJoke }) => {
 
   const submitForm = (event) => {
     event.preventDefault();
-    addNewJoke(joke);
+
+    const newJokes = {
+      id: Date.now(),
+      category: joke.category,
+      setup: joke.setup,
+      punch_line: joke.punch_line,
+      likes: Math.floor(Math.random() * 100 + 1)
+    };
+
+    axiosWithAuth()
+      .post("/jokes", newJokes)
+      .then((res) => {
+        console.log(res);
+        axiosWithAuth()
+          .get("/jokes")
+          .then((response) => setJokes(response.data))
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+
     setJoke({ id: 1, category: "", setup: "", punch_line: "", likes: 0 });
   };
 
