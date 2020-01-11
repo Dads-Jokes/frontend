@@ -22,7 +22,6 @@ const Register = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        // SetErr(err.response.data.msg);
       });
   };
 
