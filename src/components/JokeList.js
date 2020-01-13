@@ -8,12 +8,24 @@ const JokeList = () => {
 
   return (
     <div>
-      {jokes.map((joke) => (
-        <Link to={`/dashboard/${joke.id}`} key={joke.id}>
-          <JokeCard joke={joke} />
-          <hr />
-        </Link>
-      ))}
+      {jokes.map((joke) => {
+        return (
+          <>
+            <Link to={`/dashboard/${joke.id}`} key={joke.id}>
+              <JokeCard joke={joke} />
+            </Link>
+            <button
+              type="button"
+              onClick={() =>
+                setJokes(jokes.filter((item) => item.id !== joke.id))
+              }
+            >
+              DELETE
+            </button>
+            <hr />
+          </>
+        );
+      })}
     </div>
   );
 };
